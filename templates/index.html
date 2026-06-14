@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecture Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <div class="header">
+        🧠 Lecture Assistant (ChatGPT Style)
+    </div>
+
+    <div id="chat-box"></div>
+
+    <div class="input-box">
+        <input id="user-input" type="text" placeholder="Ask something like 'bagging'..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+</div>
+
+<script>
+async function sendMessage() {
+    let input = document.getElementById("user-input");
+    let message = input.value;
+    if (!message) return;
+
+    addMessage("user", message);
+
+    input.value = "";
+
+    let res = await fetch(`/ask?q=${message}`);
+    let data = await res.json();
+
+    addMessage("bot", data.answer || data.error);
+}
+
+function addMessage(sender, text) {
+    let chatBox = document.getElementById("chat-box");
+
+    let msg = document.createElement("div");
+    msg.className = sender;
+    msg.innerText = text;
+
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+
+</body>
+</html>
