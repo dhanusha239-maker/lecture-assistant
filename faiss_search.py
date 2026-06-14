@@ -1,13 +1,13 @@
 import json
 import numpy as np
 import faiss
-from openai import OpenAI
+
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # loads from .env file only
+load_dotenv()
 
-client = OpenAI()
+from config import client
 
 # Load FAISS index + metadata
 index = faiss.read_index("lectures.index")

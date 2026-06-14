@@ -1,10 +1,11 @@
-from openai import OpenAI
+
 from faiss_search import search
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
-client = OpenAI()
+from config import client
 
 def build_context(results):
     return "\n\n".join(

@@ -1,9 +1,9 @@
 import os
 import json
 import time
-from openai import OpenAI
 
-client = OpenAI()
+
+from config import client
 
 TRANSCRIPT_DIR = "transcripts"
 OUTPUT_FILE = "embeddings.json"
